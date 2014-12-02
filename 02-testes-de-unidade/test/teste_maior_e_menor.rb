@@ -18,4 +18,14 @@ class TesteMaiorMenor < MiniTest::Unit::TestCase
     assert_equal 'Jogo de pratos', algoritmo.menor.nome
     assert_equal 'Geladeira', algoritmo.maior.nome
   end
+  def test_apenas_um_produto
+    carrinho = CarrinhoDeCompras.new
+    carrinho << Produto.new('Geladeira', 450.0)
+
+    algoritmo = MaiorEMenor.new
+    algoritmo.encontra carrinho
+
+    assert_equal 'Geladeira', algoritmo.menor.nome
+    assert_equal 'Geladeira', algoritmo.maior.nome
+  end
 end
