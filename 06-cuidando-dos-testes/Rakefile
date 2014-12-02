@@ -1,0 +1,14 @@
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  files = if ENV['TEST_FILES']
+    ENV['TEST_FILES'].split(',')
+  else
+    FileList["test/**/*.rb"]
+  end
+
+  t.verbose = true
+  t.test_files = files
+end
+
+task :default => 'test'
