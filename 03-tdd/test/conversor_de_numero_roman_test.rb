@@ -8,4 +8,10 @@ class ConversorDeNumeroRomanoTest < MiniTest::Unit::TestCase
     numero = romano.converte 'I'
     assert_equal 1, numero
   end
+
+  def teste_deve_entender_o_simbolo_V
+    romano = ConversorDeNumeroRomano.new
+    numero = romano.converte 'V'
+    assert_equal 5, numero
+  end
 end
