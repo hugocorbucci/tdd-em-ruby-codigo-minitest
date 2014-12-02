@@ -20,4 +20,10 @@ class ConversorDeNumeroRomanoTest < MiniTest::Unit::TestCase
     numero = romano.converte 'II'
     assert_equal 2, numero
   end
+
+  def teste_deve_entender_quatro_simbolos_dois_a_dois_como_XXII
+    romano = ConversorDeNumeroRomano.new
+    numero = romano.converte 'XXII'
+    assert_equal 22, numero
+  end
 end
