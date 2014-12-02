@@ -22,4 +22,15 @@ class TesteMaiorPreco < MiniTest::Unit::TestCase
 
     assert_equal 900.0, valor
   end
+  def teste_deve_retornar_maior_valor_se_carrinho_contem_muitos_elementos
+    carrinho = CarrinhoDeCompras.new
+    carrinho << Item.new('Geladeira', 1, 900.0)
+    carrinho << Item.new('Fogão', 1, 1500.0)
+    carrinho << Item.new('Máquina de Lavar', 1, 750.0)
+
+    algoritmo = MaiorPreco.new
+    valor = algoritmo.encontra carrinho
+
+    assert_equal 1500.0, valor
+  end
 end
