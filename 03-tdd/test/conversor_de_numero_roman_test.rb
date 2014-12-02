@@ -32,4 +32,10 @@ class ConversorDeNumeroRomanoTest < MiniTest::Unit::TestCase
     numero = romano.converte 'IX'
     assert_equal 9, numero
   end
+
+  def teste_deve_entender_numeros_complexos_como_XXIV
+    romano = ConversorDeNumeroRomano.new
+    numero = romano.converte 'XXIV'
+    assert_equal 24, numero
+  end
 end
