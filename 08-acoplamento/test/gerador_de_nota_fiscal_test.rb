@@ -15,10 +15,11 @@ class GeradorDeNotaFiscalTest < MiniTest::Unit::TestCase
     nf = gerador.gera pedido
   end
   def teste_deve_consultar_a_tabela_para_calcular_valor
+    relogio = mock.tap{|relogio| relogio.expects(:hoje) }
     tabela = mock
     tabela.expects(:[]).with(1000.0).returns(0.2)
 
-    gerador = GeradorDeNotaFiscal.new [], tabela
+    gerador = GeradorDeNotaFiscal.new [], relogio, tabela
     pedido = Pedido.new('Mauricio', 1000, 1)
 
     nf = gerador.gera pedido
