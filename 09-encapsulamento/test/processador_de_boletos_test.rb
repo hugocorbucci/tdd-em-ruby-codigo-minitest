@@ -16,4 +16,14 @@ class ProcessadorDeBoletosTest < MiniTest::Unit::TestCase
     assert_equal 1, fatura.pagamentos.size
     assert_equal 150.0, fatura.pagamentos[0].valor
   end
+  def teste_deve_marcar_fatura_como_paga_caso_boleto_unico_pague_tudo
+    processador = ProcessadorDeBoletos.new
+
+    fatura = Fatura.new('Cliente', 150.0)
+    b1 = Boleto.new 150.0
+
+    processador.processa [b1], fatura
+
+    assert fatura.paga?
+  end
 end
