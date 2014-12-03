@@ -7,15 +7,25 @@ class TesteCarrinhoDeCompras < MiniTest::Unit::TestCase
   def setup
     @carrinho = CarrinhoDeCompras.new
   end
-  def teste_deve_adicionar_itens
-    # garante que o carrinho está vazio
+  def teste_deve_comecar_vazio
     assert_equal 0, @carrinho.itens.size
-
-    item = Item.new('Geladeira', 1, 900.0)
-    @carrinho << item
+  end
+  def teste_deve_ter_um_item_apos_adicao
+    geladeira = Item.new('Geladeira', 1, 900.0)
+    @carrinho << geladeira
 
     assert_equal 1, @carrinho.itens.size
-    assert_equal item, @carrinho.itens[0]
+    assert @carrinho.itens.include?(geladeira)
+  end
+  def teste_deve_ter_dois_itens_apos_duas_adicoes
+    geladeira = Item.new('Geladeira', 1, 900.0)
+    @carrinho << geladeira
+
+    fogao = Item.new('Fogão', 1, 600.0)
+    @carrinho << fogao
+
+    assert_equal 2, @carrinho.itens.size
+    assert @carrinho.itens.include?(fogao)
   end
   def teste_deve_retornar_zero_se_carrinho_vazio
     assert_equal 0, @carrinho.maior_valor
