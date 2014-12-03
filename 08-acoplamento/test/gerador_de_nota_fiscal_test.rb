@@ -6,12 +6,20 @@ require_relative '../lib/gerador_de_nota_fiscal.rb'
 
 class GeradorDeNotaFiscalTest < MiniTest::Unit::TestCase
   def teste_deve_persistir_NF_gerada
-    # criando o mock
     dao = mock
-    # marcando o que esperamos que aconteça
     dao.expects(:persiste)
+    sap = stub_everything
+    
+    gerador = GeradorDeNotaFiscal.new dao, sap
+    pedido = Pedido.new('Mauricio', 1000, 1)
 
-    gerador = GeradorDeNotaFiscal.new dao
+    nf = gerador.gera pedido
+  end
+  def teste_deve_enviar_NF_gerada_para_SAP
+    dao = stub_everything
+    sap = mock.tap{|sap| sap.expects(:envia)}
+
+    gerador = GeradorDeNotaFiscal.new dao, sap
     pedido = Pedido.new('Mauricio', 1000, 1)
 
     nf = gerador.gera pedido
